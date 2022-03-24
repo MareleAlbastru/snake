@@ -75,14 +75,12 @@ void Snake::moveSnake() {
 void Snake::setDir(int newDir) {
 	dir = newDir;
 	switch (dir) {
-	case stop:
-		return;
 	case north:
 		offsetX = 0.f;
 		offsetY = -gridSize;
 		if (daristyle) {
 			offsetDariusX = head.getPosition().x;
-			offsetDariusY = boardSize * gridSize;
+			offsetDariusY = (boardSize - 1) * gridSize;
 		}
 		break;
 	case south:
@@ -97,7 +95,7 @@ void Snake::setDir(int newDir) {
 		offsetX = -gridSize;
 		offsetY = 0.f;
 		if (daristyle) {
-			offsetDariusX = boardSize * gridSize;
+			offsetDariusX = (boardSize - 1) * gridSize;
 			offsetDariusY = head.getPosition().y;
 		}
 		break;
