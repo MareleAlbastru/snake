@@ -22,19 +22,32 @@ int main() {
 	}
 	in.close();
 
-	sf::ContextSettings settings;
-	settings.antialiasingLevel = 4;
-	sf::RenderWindow window(sf::VideoMode(gridSize * boardSize, gridSize * boardSize), "SNAKE", sf::Style::Default, settings);
-	window.setFramerateLimit(6);
-	Game game(window);
-	while (window.isOpen()) {
-		sf::Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed) {
-				window.close();
+	bool bwindowOpen = true;
+
+	while (bwindowOpen) {
+		sf::ContextSettings settings;
+		settings.antialiasingLevel = 4;
+
+		sf::RenderWindow window(sf::VideoMode(gridSize * boardSize, gridSize * boardSize), "SNAKE", sf::Style::Default, settings);
+		window.setFramerateLimit(6);
+
+		Game game(window);
+
+		while (window.isOpen()) {
+			sf::Event event;
+			while (window.pollEvent(event)) {
+				switch (event.type) {
+				case sf::Event::Closed:
+					bwindowOpen = false;
+					window.close();
+					return 0;
+				
+				}
 			}
+
+			game.run();
 		}
-		game.run();
 	}
+
 	return 0;
 }

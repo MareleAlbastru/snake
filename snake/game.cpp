@@ -43,13 +43,11 @@ void Game::doLogic() {
 
 void Game::run() {
 	if (!hasEnded) {
-		if (GetAsyncKeyState(VK_ESCAPE) & 1) { paused = !paused; Sleep(100); }
+		if (GetAsyncKeyState(VK_ESCAPE) & 1) { paused = !paused; }
 		if (!paused) {
 			doLogic();
-			drawAll();
 		}
+		drawAll();
 	}
-	else {
-		window->close();
-	}
+	else { window->close(); }
 }
