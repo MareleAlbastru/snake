@@ -12,7 +12,7 @@ class Game {
 private:
 	Snake snake;
 	Food apple;
-	Board board;
+	Board* board;
 	sf::RenderWindow* window;
 	void drawAll();
 	bool ateFruit();

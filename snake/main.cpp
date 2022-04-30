@@ -44,8 +44,7 @@ int main() {
 				
 				}
 			}
-
-			game.run();
+			game.run();		
 		}
 	}
 
