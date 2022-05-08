@@ -2,13 +2,14 @@
 
 Game::Game(sf::RenderWindow& otherWindow) {
 	window = &otherWindow;
+	board = new Board;
 	paused = false;
 	hasEnded = false;
 }
 
 void Game::drawAll() {
 	window->clear();
-	board.drawBoard(*window);
+	board->drawBoard(*window);
 	apple.drawApple(*window);
 	snake.drawSnake(*window);
 	window->display();
@@ -43,13 +44,17 @@ void Game::doLogic() {
 
 void Game::run() {
 	if (!hasEnded) {
-		if (GetAsyncKeyState(VK_ESCAPE) & 1) { paused = !paused; Sleep(100); }
+		if (GetAsyncKeyState(VK_ESCAPE) & 1) { paused = !paused; }
 		if (!paused) {
 			doLogic();
-			drawAll();
 		}
+		else {
+			if (GetAsyncKeyState('0')) {
+				daristyle = !daristyle;
+				snake.setDir(snake.getDir());
+			}
+		}
+		drawAll();
 	}
-	else {
-		window->close();
-	}
+	else { window->close(); }
 }
